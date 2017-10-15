@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		796F194A1F15977900063C8B /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F19491F15977900063C8B /* PhotoHelper.swift */; };
+		7995DCAC1ED0CF8200E70A48 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7995DCAB1ED0CF8200E70A48 /* NetworkConstants.swift */; };
+		AB10C7E35DBD835F0A3C9661 /* Pods_MobilePhotoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942C349AB0741F3185025593 /* Pods_MobilePhotoApp.framework */; };
+		BE162CD21EA953C300EFAB76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE162CD11EA953C300EFAB76 /* AppDelegate.swift */; };
+		BE162CD71EA953C300EFAB76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE162CD51EA953C300EFAB76 /* Main.storyboard */; };
+		BE162CD91EA953C300EFAB76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE162CD81EA953C300EFAB76 /* Assets.xcassets */; };
+		BE162CDC1EA953C300EFAB76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE162CDA1EA953C300EFAB76 /* LaunchScreen.storyboard */; };
+		BE2FF6E41EAD65C800BB685D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE2FF6E31EAD65C800BB685D /* GoogleService-Info.plist */; };
+		BE3D80471EC65A3A0051C0C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D80431EC65A3A0051C0C5 /* LoginViewController.swift */; };
+		BE3D80481EC65A3A0051C0C5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D80441EC65A3A0051C0C5 /* MainViewController.swift */; };
+		BE3D80491EC65A3A0051C0C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D80451EC65A3A0051C0C5 /* SettingsViewController.swift */; };
+		BE3D804E1EC65DB00051C0C5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D804D1EC65DB00051C0C5 /* NetworkManager.swift */; };
+		BE3D80501EC678FF0051C0C5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D804F1EC678FF0051C0C5 /* UserManager.swift */; };
+		BED6A49B1EB00E6700DD1DDE /* CameraSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED6A49A1EB00E6700DD1DDE /* CameraSettings.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5E3E72DE885B05BEABF525F9 /* Pods-MobilePhotoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobilePhotoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MobilePhotoApp/Pods-MobilePhotoApp.release.xcconfig"; sourceTree = "<group>"; };
+		796F19491F15977900063C8B /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
+		7995DCAB1ED0CF8200E70A48 /* NetworkConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		942C349AB0741F3185025593 /* Pods_MobilePhotoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobilePhotoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE162CCE1EA953C300EFAB76 /* MobilePhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobilePhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE162CD11EA953C300EFAB76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BE162CD61EA953C300EFAB76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BE162CD81EA953C300EFAB76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE162CDB1EA953C300EFAB76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BE162CDD1EA953C300EFAB76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE2FF6E31EAD65C800BB685D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BE2FF6E51EAD671000BB685D /* MobilePhotoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MobilePhotoApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE3D80431EC65A3A0051C0C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BE3D80441EC65A3A0051C0C5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BE3D80451EC65A3A0051C0C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BE3D804D1EC65DB00051C0C5 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BE3D804F1EC678FF0051C0C5 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BED6A49A1EB00E6700DD1DDE /* CameraSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSettings.swift; sourceTree = "<group>"; };
+		EDC611ED9F3829A08F44E452 /* Pods-MobilePhotoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobilePhotoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobilePhotoApp/Pods-MobilePhotoApp.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE162CCB1EA953C300EFAB76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB10C7E35DBD835F0A3C9661 /* Pods_MobilePhotoApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3E701C316DC2F622BEAFCEC7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDC611ED9F3829A08F44E452 /* Pods-MobilePhotoApp.debug.xcconfig */,
+				5E3E72DE885B05BEABF525F9 /* Pods-MobilePhotoApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		796F19481F15977900063C8B /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				796F19491F15977900063C8B /* PhotoHelper.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		8C7CF96D0C97377CCA977DED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				942C349AB0741F3185025593 /* Pods_MobilePhotoApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE162CC51EA953C200EFAB76 = {
+			isa = PBXGroup;
+			children = (
+				BE162CD01EA953C300EFAB76 /* MobilePhotoApp */,
+				BE162CCF1EA953C300EFAB76 /* Products */,
+				3E701C316DC2F622BEAFCEC7 /* Pods */,
+				8C7CF96D0C97377CCA977DED /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BE162CCF1EA953C300EFAB76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE162CCE1EA953C300EFAB76 /* MobilePhotoApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE162CD01EA953C300EFAB76 /* MobilePhotoApp */ = {
+			isa = PBXGroup;
+			children = (
+				BE162CD11EA953C300EFAB76 /* AppDelegate.swift */,
+				BED6A49A1EB00E6700DD1DDE /* CameraSettings.swift */,
+				BE162CD51EA953C300EFAB76 /* Main.storyboard */,
+				BE3D80421EC65A3A0051C0C5 /* ViewControllers */,
+				BE3D80221EC6424D0051C0C5 /* Common */,
+				BE3D80211EC642370051C0C5 /* Other */,
+			);
+			path = MobilePhotoApp;
+			sourceTree = "<group>";
+		};
+		BE3D80211EC642370051C0C5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				BE162CD81EA953C300EFAB76 /* Assets.xcassets */,
+				BE162CDA1EA953C300EFAB76 /* LaunchScreen.storyboard */,
+				BE162CDD1EA953C300EFAB76 /* Info.plist */,
+				BE2FF6E31EAD65C800BB685D /* GoogleService-Info.plist */,
+				BE2FF6E51EAD671000BB685D /* MobilePhotoApp-Bridging-Header.h */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		BE3D80221EC6424D0051C0C5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				796F19481F15977900063C8B /* Photos */,
+				BE3D804C1EC65D640051C0C5 /* Network */,
+				BE3D804F1EC678FF0051C0C5 /* UserManager.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BE3D80421EC65A3A0051C0C5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE3D80431EC65A3A0051C0C5 /* LoginViewController.swift */,
+				BE3D80441EC65A3A0051C0C5 /* MainViewController.swift */,
+				BE3D80451EC65A3A0051C0C5 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BE3D804C1EC65D640051C0C5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BE3D804D1EC65DB00051C0C5 /* NetworkManager.swift */,
+				7995DCAB1ED0CF8200E70A48 /* NetworkConstants.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE162CCD1EA953C300EFAB76 /* MobilePhotoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE162CE01EA953C300EFAB76 /* Build configuration list for PBXNativeTarget "MobilePhotoApp" */;
+			buildPhases = (
+				AB4E4B71105B6E29832E5784 /* [CP] Check Pods Manifest.lock */,
+				BE162CCA1EA953C300EFAB76 /* Sources */,
+				BE162CCB1EA953C300EFAB76 /* Frameworks */,
+				BE162CCC1EA953C300EFAB76 /* Resources */,
+				69E1E273804F079278A103E7 /* [CP] Embed Pods Frameworks */,
+				303E1734F80A7970BAB43B5B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MobilePhotoApp;
+			productName = MobilePhotoApp;
+			productReference = BE162CCE1EA953C300EFAB76 /* MobilePhotoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE162CC61EA953C200EFAB76 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = User;
+				TargetAttributes = {
+					BE162CCD1EA953C300EFAB76 = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = 2HSTWENA8U;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = BE162CC91EA953C200EFAB76 /* Build configuration list for PBXProject "MobilePhotoApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE162CC51EA953C200EFAB76;
+			productRefGroup = BE162CCF1EA953C300EFAB76 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE162CCD1EA953C300EFAB76 /* MobilePhotoApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE162CCC1EA953C300EFAB76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE162CDC1EA953C300EFAB76 /* LaunchScreen.storyboard in Resources */,
+				BE2FF6E41EAD65C800BB685D /* GoogleService-Info.plist in Resources */,
+				BE162CD91EA953C300EFAB76 /* Assets.xcassets in Resources */,
+				BE162CD71EA953C300EFAB76 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		303E1734F80A7970BAB43B5B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MobilePhotoApp/Pods-MobilePhotoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69E1E273804F079278A103E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MobilePhotoApp/Pods-MobilePhotoApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB4E4B71105B6E29832E5784 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE162CCA1EA953C300EFAB76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7995DCAC1ED0CF8200E70A48 /* NetworkConstants.swift in Sources */,
+				796F194A1F15977900063C8B /* PhotoHelper.swift in Sources */,
+				BE3D80491EC65A3A0051C0C5 /* SettingsViewController.swift in Sources */,
+				BE162CD21EA953C300EFAB76 /* AppDelegate.swift in Sources */,
+				BE3D80501EC678FF0051C0C5 /* UserManager.swift in Sources */,
+				BE3D804E1EC65DB00051C0C5 /* NetworkManager.swift in Sources */,
+				BED6A49B1EB00E6700DD1DDE /* CameraSettings.swift in Sources */,
+				BE3D80471EC65A3A0051C0C5 /* LoginViewController.swift in Sources */,
+				BE3D80481EC65A3A0051C0C5 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE162CD51EA953C300EFAB76 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE162CD61EA953C300EFAB76 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BE162CDA1EA953C300EFAB76 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE162CDB1EA953C300EFAB76 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE162CDE1EA953C300EFAB76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE162CDF1EA953C300EFAB76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE162CE11EA953C300EFAB76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDC611ED9F3829A08F44E452 /* Pods-MobilePhotoApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2HSTWENA8U;
+				INFOPLIST_FILE = MobilePhotoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tweezar.photoapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "32291abe-31f8-4a9f-9e83-22f7b9a46ca7";
+				PROVISIONING_PROFILE_SPECIFIER = PhotoApp_AdHoc;
+				SWIFT_OBJC_BRIDGING_HEADER = "MobilePhotoApp/MobilePhotoApp-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BE162CE21EA953C300EFAB76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E3E72DE885B05BEABF525F9 /* Pods-MobilePhotoApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2HSTWENA8U;
+				INFOPLIST_FILE = MobilePhotoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tweezar.photoapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "32291abe-31f8-4a9f-9e83-22f7b9a46ca7";
+				PROVISIONING_PROFILE_SPECIFIER = PhotoApp_AdHoc;
+				SWIFT_OBJC_BRIDGING_HEADER = "MobilePhotoApp/MobilePhotoApp-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE162CC91EA953C200EFAB76 /* Build configuration list for PBXProject "MobilePhotoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE162CDE1EA953C300EFAB76 /* Debug */,
+				BE162CDF1EA953C300EFAB76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE162CE01EA953C300EFAB76 /* Build configuration list for PBXNativeTarget "MobilePhotoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE162CE11EA953C300EFAB76 /* Debug */,
+				BE162CE21EA953C300EFAB76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE162CC61EA953C200EFAB76 /* Project object */;
+}
