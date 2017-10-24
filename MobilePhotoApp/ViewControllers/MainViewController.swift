@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 import FBSDKLoginKit
 import FBSDKCoreKit
@@ -15,6 +16,8 @@ import FBSDKCoreKit
 import Alamofire
 
 class MainViewController: UIViewController {
+  
+  var isReadyForTakingPhotos = true
   
   let photoHelper = PhotoHelper()
   var photosArray = [UIImage]()
@@ -33,8 +36,18 @@ class MainViewController: UIViewController {
   // MARK: - UIViewController overrides
   //
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Hide system volume view
+    //
+    let volumeView: MPVolumeView = MPVolumeView(frame: CGRect.zero)
+    view.addSubview(volumeView)
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    startListenVolumeButton()
     
     btnUploadPhoto.isEnabled = (photoPreviewView.image != nil)
     
@@ -46,6 +59,37 @@ class MainViewController: UIViewController {
       } else {
         print("Access FAIL")
       }
+    }
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    stopListenVolumeButton()
+  }
+  
+  //
+  // MARK: - Volume button
+  //
+  
+  fileprivate func startListenVolumeButton() {
+    print("Start  listen")
+    let audioSession = AVAudioSession.sharedInstance()
+    do { try AVAudioSession.sharedInstance().setActive(true) }
+    catch { debugPrint("\(error)") }
+    audioSession.addObserver(self, forKeyPath: "outputVolume", options: .new, context: nil)
+  }
+  
+  fileprivate func stopListenVolumeButton() {
+    print("Stop listen")
+    AVAudioSession.sharedInstance().removeObserver(self, forKeyPath: "outputVolume")
+    do { try AVAudioSession.sharedInstance().setActive(false) }
+    catch { debugPrint("\(error)") }
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    
+    if keyPath == "outputVolume" {
+      takePhotoAction()
     }
   }
   
@@ -69,73 +113,8 @@ class MainViewController: UIViewController {
   // MARK: - Buttons actions
   //
   
-  @IBAction func takePhotoAction(_ sender: UIButton) {
-    
-    //Camera access
-    //
-    AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { response in
-      if response {
-        
-        self.lockControls()
-        self.photosArray.removeAll()
-        
-        let defaults = UserDefaults.standard
-        
-        let numberOfPhotos = defaults.integer(forKey: UDKeys.camSettings.numberOfPhotos)
-        let startingFocalLength = defaults.float(forKey: UDKeys.camSettings.startingFocalLength)
-        let focalLengthDelta = defaults.float(forKey: UDKeys.camSettings.focalLengthDelta)
-        let WBR = defaults.float(forKey: UDKeys.camSettings.WBR)
-        let WBG = defaults.float(forKey: UDKeys.camSettings.WBG)
-        let WBB = defaults.float(forKey: UDKeys.camSettings.WBB)
-        let delayTime = defaults.integer(forKey: UDKeys.camSettings.delayTime)
-        let zoom = defaults.float(forKey: UDKeys.camSettings.zoom)
-        
-        if delayTime > 0 {
-          
-          self.showLoadingViewWith("Wait \(delayTime) seconds please")
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delayTime)) {
-          self.hideLoadingView()
-          
-          self.photoHelper.onTakingPhotosComplete = { [weak self] (photos) in
-            
-            print("TAKING PHOTOS COMPLETE! Number of photos: ", photos.count)
-            
-            self?.unlockControls()
-            if photos.count > 0 {
-              self?.photosArray = photos
-              self?.photoPreviewView.image = photos[0]
-              self?.btnUploadPhoto.isEnabled = true
-            } else {
-              self?.photoPreviewView.image = nil
-              self?.btnUploadPhoto.isEnabled = false
-            }
-          }
-          
-          let settings = CameraSettings.init(numberOfPhotos: numberOfPhotos,
-                                             startingFocalLength: startingFocalLength,
-                                             focalLengthDelta: focalLengthDelta,
-                                             wbr: WBR,
-                                             wbg: WBG,
-                                             wbb: WBB,
-                                             delayTime: delayTime,
-                                             zoom: zoom)
-          
-          self.photoHelper.takePhotos(settings: settings)
-        }
-        
-      } else {
-        
-        let alertController = UIAlertController(title: "Access error",
-                                                message: "App doesn't have permission to use Camera, please change privacy settings",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-        
-        print("Camera Access FAIL")
-      }
-    }
+  @IBAction func btnTakePhotoPressed(_ sender: UIButton) {
+    takePhotoAction()
   }
   
   @IBAction func settingsAction(_ sender: UIButton) {
@@ -190,6 +169,78 @@ class MainViewController: UIViewController {
   //
   // MARK: -
   //
+  
+  private func getCurrentCameraSettings() -> CameraSettings {
+    let defaults = UserDefaults.standard
+    
+    let numberOfPhotos = defaults.integer(forKey: UDKeys.camSettings.numberOfPhotos)
+    let startingFocalLength = defaults.float(forKey: UDKeys.camSettings.startingFocalLength)
+    let focalLengthDelta = defaults.float(forKey: UDKeys.camSettings.focalLengthDelta)
+    let WBR = defaults.float(forKey: UDKeys.camSettings.WBR)
+    let WBG = defaults.float(forKey: UDKeys.camSettings.WBG)
+    let WBB = defaults.float(forKey: UDKeys.camSettings.WBB)
+    let delayTime = defaults.integer(forKey: UDKeys.camSettings.delayTime)
+    let zoom = defaults.float(forKey: UDKeys.camSettings.zoom)
+    
+    let settings = CameraSettings(numberOfPhotos: numberOfPhotos,
+                                  startingFocalLength: startingFocalLength,
+                                  focalLengthDelta: focalLengthDelta,
+                                  wbr: WBR,
+                                  wbg: WBG,
+                                  wbb: WBB,
+                                  delayTime: delayTime,
+                                  zoom: zoom)
+    return settings
+  }
+  
+  private func takePhotoAction() {
+    
+    if isReadyForTakingPhotos {
+      isReadyForTakingPhotos = false
+      
+      //Camera access
+      //
+      AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { response in
+        if response {
+          
+          self.lockControls()
+          self.photosArray.removeAll()
+          
+          let camSettings = self.getCurrentCameraSettings()
+          
+          if camSettings.delayTime() > 0 {
+            self.showLoadingViewWith("Wait \(camSettings.delayTime()) seconds please")
+          }
+          
+          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(camSettings.delayTime())) {
+            self.hideLoadingView()
+            
+            self.photoHelper.onTakingPhotosComplete = { [weak self] (photos) in
+              
+              self?.unlockControls()
+              if photos.count > 0 {
+                self?.photosArray = photos
+              }
+              self?.photoPreviewView.image = photos.count > 0 ? photos[0] : nil
+              self?.btnUploadPhoto.isEnabled = photos.count > 0
+              
+              self?.isReadyForTakingPhotos = true
+            }
+            self.photoHelper.takePhotos(settings: camSettings)
+          }
+        } else {
+          
+          let alertController = UIAlertController(title: "Access error",
+                                                  message: "App doesn't have permission to use Camera, please change privacy settings",
+                                                  preferredStyle: .alert)
+          alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            self.isReadyForTakingPhotos = true
+          }))
+          self.present(alertController, animated: true, completion: nil)
+        }
+      }
+    }
+  }
   
   func logout() {
     navigationController?.popViewController(animated: true)
