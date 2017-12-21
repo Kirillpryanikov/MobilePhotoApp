@@ -152,6 +152,7 @@ class PhotoHelper: NSObject {
       print("[ Lens position ]: \t", focalLength)
       
       let settings = AVCapturePhotoSettings.init()
+      settings.flashMode = .on
       
       debugPrint("sessionOutput.capturePhoto ", self.sessionOutput)
       self.sessionOutput.capturePhoto(with: settings, delegate: self)
