@@ -123,33 +123,30 @@ class MainViewController: UIViewController {
   
   @IBAction func btnUploadAction(_ sender: UIButton) {
     
-    if photosArray.count > 0 {
-      if let token = UserManager.sharedInstance.accessToken {
-        
-        lockControls()
-        showLoadingViewWith("Uploading...")
-        
-        NetworkManager.sharedInstance.uploadImageRequest(withSuccess: {
-          
-          self.hideLoadingView()
-          self.unlockControls()
-          
-          self.showAlert(title: "Success!", message: "Images successfully uploaded!")
-          
-        }, failure: { (errorMessage) in
-          
-          print("Error message: \(errorMessage)")
-          
-          self.hideLoadingView()
-          self.unlockControls()
-          
-          self.showAlert(title: "Error", message: "Uploading image error")
-          
-        }, images: photosArray, token: token)
-      } else {
-        self.showAlert(title: "Error", message: "Uploading image error")
-      }
+    guard photosArray.count > 0 else { return }
+    
+    guard let token = UserManager.sharedInstance.accessToken else {
+      self.showAlert(title: "Error", message: "Uploading image error")
+      return
     }
+    
+    lockControls()
+    showLoadingViewWith("Uploading...")
+    
+    NetworkManager.sharedInstance.uploadImageRequest(withSuccess: {
+      
+      self.hideLoadingView()
+      self.unlockControls()
+      self.showAlert(title: "Success!", message: "Images successfully uploaded!")
+      
+    }, failure: { (errorMessage) in
+      print("Error message: \(errorMessage)")
+      
+      self.hideLoadingView()
+      self.unlockControls()
+      self.showAlert(title: "Error", message: "Uploading image error")
+      
+    }, images: photosArray, token: token)
   }
   
   @IBAction func logoutAction(_ sender: UIButton) {
@@ -201,35 +198,8 @@ class MainViewController: UIViewController {
       //Camera access
       //
       AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { response in
-        if response {
-          
-          self.lockControls()
-          self.photosArray.removeAll()
-          
-          let camSettings = self.getCurrentCameraSettings()
-          
-          if camSettings.delayTime() > 0 {
-            self.showLoadingViewWith("Wait \(camSettings.delayTime()) seconds please")
-          }
-          
-          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(camSettings.delayTime())) {
-            self.hideLoadingView()
-            
-            self.photoHelper.onTakingPhotosComplete = { [weak self] (photos) in
-              
-              self?.unlockControls()
-              if photos.count > 0 {
-                self?.photosArray = photos
-              }
-              self?.photoPreviewView.image = photos.count > 0 ? photos[0] : nil
-              self?.btnUploadPhoto.isEnabled = photos.count > 0
-              
-              self?.isReadyForTakingPhotos = true
-            }
-            self.photoHelper.takePhotos(settings: camSettings)
-          }
-        } else {
-          
+        
+        guard response != nil else {
           let alertController = UIAlertController(title: "Access error",
                                                   message: "App doesn't have permission to use Camera, please change privacy settings",
                                                   preferredStyle: .alert)
@@ -237,6 +207,34 @@ class MainViewController: UIViewController {
             self.isReadyForTakingPhotos = true
           }))
           self.present(alertController, animated: true, completion: nil)
+          
+          return
+        }
+        
+        self.lockControls()
+        self.photosArray.removeAll()
+        
+        let camSettings = self.getCurrentCameraSettings()
+        
+        if camSettings.delayTime() > 0 {
+          self.showLoadingViewWith("Wait \(camSettings.delayTime()) seconds please")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(camSettings.delayTime())) {
+          self.hideLoadingView()
+          
+          self.photoHelper.onTakingPhotosComplete = { [weak self] (photos) in
+            
+            self?.unlockControls()
+            if photos.count > 0 {
+              self?.photosArray = photos
+            }
+            self?.photoPreviewView.image = photos.count > 0 ? photos[0] : nil
+            self?.btnUploadPhoto.isEnabled = photos.count > 0
+            
+            self?.isReadyForTakingPhotos = true
+          }
+          self.photoHelper.takePhotos(settings: camSettings)
         }
       }
     }
@@ -247,11 +245,15 @@ class MainViewController: UIViewController {
   }
   
   func lockControls() {
-    view.isUserInteractionEnabled = false
+    DispatchQueue.main.async {
+      self.view.isUserInteractionEnabled = false
+    }
   }
   
   func unlockControls() {
-    view.isUserInteractionEnabled = true
+    DispatchQueue.main.async {
+      self.view.isUserInteractionEnabled = true
+    }
   }
   
   fileprivate func showAlert(title: String, message: String) {

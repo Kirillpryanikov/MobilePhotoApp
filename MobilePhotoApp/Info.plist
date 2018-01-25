@@ -62,6 +62,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Taking photos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Saving photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Saving photos</string>
 	<key>UILaunchStoryboardName</key>

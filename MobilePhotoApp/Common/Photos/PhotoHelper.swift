@@ -67,6 +67,8 @@ class PhotoHelper: NSObject {
     do {
       let input = try AVCaptureDeviceInput(device: device)
       
+      captureSession.sessionPreset = AVCaptureSessionPresetPhoto
+      
       if(captureSession.canAddInput(input)) {
         
         captureSession.addInput(input);
@@ -151,10 +153,12 @@ class PhotoHelper: NSObject {
       
       print("[ Lens position ]: \t", focalLength)
       
-      let settings = AVCapturePhotoSettings.init()
-      settings.flashMode = .on
+      let settings = AVCapturePhotoSettings()
       
-      debugPrint("sessionOutput.capturePhoto ", self.sessionOutput)
+      // Flash mode
+      //      settings.flashMode = .on
+      //      device.flashMode = AVCaptureFlashMode.on
+      
       self.sessionOutput.capturePhoto(with: settings, delegate: self)
     })
   }
@@ -166,6 +170,21 @@ class PhotoHelper: NSObject {
 
 extension PhotoHelper: AVCapturePhotoCaptureDelegate {
   
+  @available(iOS 11.0, *)
+  func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    
+    if let error = error {
+      print(error.localizedDescription)
+    }
+    
+    if let imageData = photo.fileDataRepresentation(),
+      let image = UIImage(data: imageData) {
+      photosArray.append(image)
+    }
+    
+    handleNextPhotoAction()
+  }
+  
   func capture(_ captureOutput: AVCapturePhotoOutput,
                didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?,
                previewPhotoSampleBuffer: CMSampleBuffer?,
@@ -173,72 +192,64 @@ extension PhotoHelper: AVCapturePhotoCaptureDelegate {
                bracketSettings: AVCaptureBracketedStillImageSettings?,
                error: Error?) {
     
-    print("didFinishProcessingPhotoSampleBuffer")
-    
     if let error = error {
       print(error.localizedDescription)
     }
     
     if let sampleBuffer = photoSampleBuffer,
-      let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: nil) {
+      let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: nil),
+      let dataProvider = CGDataProvider(data: dataImage as CFData),
+      let cgImageRef = CGImage(jpegDataProviderSource: dataProvider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
       
-      let dataProvider = CGDataProvider(data: dataImage as CFData)
-      let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
       let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
-      
-//      savePhoto(image)
-      
-      print("Photos array append image!")
       photosArray.append(image)
+    }
+    
+    handleNextPhotoAction()
+  }
+  
+  private func handleNextPhotoAction() {
+    
+    guard let camera = cameraDevice else { onTakingPhotosComplete?(photosArray); return }
+    
+    if let camSettings = cameraSettings, currentPhotoIndex < camSettings.numberOfPhotos() {
       
-      if let camSettings = cameraSettings, currentPhotoIndex < camSettings.numberOfPhotos() {
-        
-        var nextFocalLength = camSettings.startingFocalLength() + (camSettings.focalLengthDelta() * Float(currentPhotoIndex))
-        
-        // Lens position value must be in [0, 1] range
-        //
-        if nextFocalLength > 1.0 {
-          nextFocalLength = 1.0
-        }
-        
-        if let camera = cameraDevice {
-          self.capturePhotos(device: camera, focalLength: nextFocalLength, currentPhotoNumber: self.currentPhotoIndex + 1)
-        }
-        
-      } else {
-        if let camera = cameraDevice {
-          camera.unlockForConfiguration()
-          self.onTakingPhotosComplete?(self.photosArray)
-        }
+      var nextFocalLength = camSettings.startingFocalLength() + (camSettings.focalLengthDelta() * Float(currentPhotoIndex))
+      // Lens position value must be in [0, 1] range
+      if nextFocalLength > 1.0 {
+        nextFocalLength = 1.0
       }
+      self.capturePhotos(device: camera, focalLength: nextFocalLength, currentPhotoNumber: self.currentPhotoIndex + 1)
+    } else {
+      camera.unlockForConfiguration()
+      self.onTakingPhotosComplete?(self.photosArray)
     }
   }
 }
 
-////
-//// MARK: - Saving photos in Photo library for testing
-////
+//
+// MARK: - Saving photos in Photo library for testing
+//
 //
 //extension PhotoHelper {
-//  
+//
 //  // Saving Image here
 //  //
 //  fileprivate func savePhoto(_ image: UIImage) {
 //    UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
 //  }
-//  
+//
 //  // Add image to Library
 //  //
 //  func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
 //    if let error = error {
-//      
+//
 //      print("Save error: ", error.localizedDescription)
 //    } else {
-//      
+//
 //      print("Saved successfully!")
 //    }
 //  }
-//  
 //}
 
 
